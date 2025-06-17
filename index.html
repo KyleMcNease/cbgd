@@ -1,1 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tennessee CDBG-DR | Strategic Implementation Plan – HORNE</title>
 
+  <!-- Chart.js + html2pdf -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- Tailwind CDN for utility classes (quick polish) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --horne-navy: #002F6C;
+      --horne-orange: #F26F21;
+      --horne-gray: #F6F8FA;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Tahoma, Verdana, sans-serif;
+      background: var(--horne-gray);
+      color: #374151;
+    }
+
+    /* Glass cards */
+    .glass {
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.6);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,.05);
+    }
+
+    .fade-up {animation: fadeUp .7s ease-out both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+    /* Accordion */
+    details summary::-webkit-details-marker{display:none}
+    summary{list-style:none;cursor:pointer}
+    summary::after{content:"▸";float:right;transition:transform .25s}
+    details[open] summary::after{transform:rotate(90deg)}
+  </style>
+</head>
+<body class="leading-relaxed">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-sm">
+    <div class="mx-auto max-w-7xl px-6 py-3 flex items-center justify-between">
+      <div class="h-8 flex items-center">
+        <span class="text-xl font-bold text-[var(--horne-navy)]">HORNE</span>
+      </div>
+      <button onclick="exportPDF()" class="inline-flex items-center gap-2 bg-[var(--horne-orange)] text-white px-4 py-2 rounded-full text-sm font-semibold shadow hover:opacity-90 transition">
+        ⬇️ Download Executive Brief PDF
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-[var(--horne-navy)] text-white">
+    <div class="absolute inset-0 opacity-10" style="background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22><defs><pattern id=%22grid%22 width=%2210%22 height=%2210%22 patternUnits=%22userSpaceOnUse%22><path d=%22M10 0L0 0 0 10%22 fill=%22none%22 stroke=%22white%22 stroke-width=%220.5%22/></pattern></defs><rect width=%22100%22 height=%22100%22 fill=%22url(%23grid)%22/></svg>');"></div>
+    <div class="relative max-w-5xl mx-auto px-6 py-20 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow">Tennessee&nbsp;CDBG-DR<br />Implementation Roadmap</h1>
+      <p class="text-lg md:text-xl opacity-90">Gap Analysis • Best-Practice Synthesis • 18-Month Execution Plan</p>
+
+      <!-- KPI cards -->
+      <div class="grid md:grid-cols-4 gap-4 mt-12">
+        <div class="glass p-6"><div class="text-3xl font-bold">125</div><div class="text-sm uppercase tracking-wide opacity-80">Areas Reviewed</div></div>
+        <div class="glass p-6"><div class="text-3xl font-bold text-emerald-400">76</div><div class="text-sm uppercase tracking-wide opacity-80">Current Strengths</div></div>
+        <div class="glass p-6"><div class="text-3xl font-bold text-red-400">49</div><div class="text-sm uppercase tracking-wide opacity-80">Identified Gaps</div></div>
+        <div class="glass p-6"><div class="text-3xl font-bold">18</div><div class="text-sm uppercase tracking-wide opacity-80">Month Roll‑out</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance Charts -->
+  <section class="max-w-7xl mx-auto px-6 mt-16 space-y-12">
+    <h2 class="text-2xl font-bold text-[var(--horne-navy)]">Compliance Snapshot</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="glass p-6 fade-up"><h3 class="font-semibold mb-4">Overall Status</h3><canvas id="donutChart"></canvas></div>
+      <div class="glass p-6 fade-up"><h3 class="font-semibold mb-4">Gap Hot‑Spots</h3><canvas id="barChart"></canvas></div>
+    </div>
+  </section>
+
+  <!-- Priorities Accordion -->
+  <section class="max-w-7xl mx-auto px-6 mt-20">
+    <h2 class="text-2xl font-bold text-[var(--horne-navy)] mb-6">Priority Workstreams</h2>
+    <div class="space-y-4">
+      <details class="glass p-6 fade-up open:shadow-lg"><summary class="font-medium text-lg flex items-center"><span class="flex-initial bg-[var(--horne-orange)] text-white w-8 h-8 rounded-full flex items-center justify-center mr-3">1</span>Property / Asset Management Framework<span class="ml-4 bg-red-500 text-white text-xs uppercase tracking-wide rounded-full px-2 py-0.5">Critical</span></summary><div class="mt-4 text-sm leading-relaxed text-gray-700"><p><strong>Gap:</strong> No policy for CDBG‑DR funded acquisitions, dispositions, or tracking—a major OIG payback risk.</p><p class="mt-2"><strong>Action:</strong> Adopt Texas GLO Ch. 14 "CDR Compliance" structure: lifecycle inventory, GIS‑based tracking, surplus disposition, HUD 24 CFR 570.503(b)(7) compliance.</p><p class="mt-2"><strong>Target Date:</strong> Month 2 (Phase 1).</p></div></details>
+      <details class="glass p-6 fade-up"><summary class="font-medium text-lg flex items-center"><span class="flex-initial bg-[var(--horne-orange)] text-white w-8 h-8 rounded-full flex items-center justify-center mr-3">2</span>Duplication of Benefits System<span class="ml-4 bg-red-500 text-white text-xs uppercase tracking-wide rounded-full px-2 py-0.5">Critical</span></summary><div class="mt-4 text-sm leading-relaxed text-gray-700"><p><strong>Gap:</strong> Lacks Stafford §312 compliance checks.</p><p class="mt-2"><strong>Action:</strong> Lift Kentucky DR Handbook Ch. 10 flow‑chart, build TN‑specific DOB affidavit + Salesforce triage engine.</p><p class="mt-2"><strong>Target Date:</strong> Month 3 (Phase 1).</p></div></details>
+      <details class="glass p-6 fade-up"><summary class="font-medium text-lg flex items-center"><span class="flex-initial bg-[var(--horne-orange)] text-white w-8 h-8 rounded-full flex items-center justify-center mr-3">3</span>Financial Management Controls<span class="ml-4 bg-orange-500 text-white text-xs uppercase tracking-wide rounded-full px-2 py-0.5">High</span></summary><div class="mt-4 text-sm leading-relaxed text-gray-700"><p><strong>Gap:</strong> Enhanced internal controls needed for DR-specific requirements including waiver tracking.</p><p class="mt-2"><strong>Action:</strong> Implement Federal Register waiver tracking system, vendor debarment verification (SAM.gov), cost reasonableness procedures.</p><p class="mt-2"><strong>Target Date:</strong> Month 4 (Phase 2).</p></div></details>
+      <details class="glass p-6 fade-up"><summary class="font-medium text-lg flex items-center"><span class="flex-initial bg-[var(--horne-orange)] text-white w-8 h-8 rounded-full flex items-center justify-center mr-3">4</span>Monitoring & Reporting Systems<span class="ml-4 bg-orange-500 text-white text-xs uppercase tracking-wide rounded-full px-2 py-0.5">High</span></summary><div class="mt-4 text-sm leading-relaxed text-gray-700"><p><strong>Gap:</strong> DR-specific monitoring protocols required including DRGR system integration.</p><p class="mt-2"><strong>Action:</strong> Deploy DRGR integration, quarterly performance reporting automation, subrecipient monitoring with risk-based approach.</p><p class="mt-2"><strong>Target Date:</strong> Month 6 (Phase 2).</p></div></details>
+      <details class="glass p-6 fade-up"><summary class="font-medium text-lg flex items-center"><span class="flex-initial bg-[var(--horne-orange)] text-white w-8 h-8 rounded-full flex items-center justify-center mr-3">5</span>Procurement Policy Updates<span class="ml-4 bg-blue-500 text-white text-xs uppercase tracking-wide rounded-full px-2 py-0.5">Medium</span></summary><div class="mt-4 text-sm leading-relaxed text-gray-700"><p><strong>Gap:</strong> Enhanced procurement procedures needed for disaster recovery context.</p><p class="mt-2"><strong>Action:</strong> Update emergency procurement authorities, implement micro-purchase threshold guidance, create DR-specific procurement templates.</p><p class="mt-2"><strong>Target Date:</strong> Month 8 (Phase 2).</p></div></details>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="max-w-7xl mx-auto px-6 mt-24 mb-32">
+    <h2 class="text-2xl font-bold text-[var(--horne-navy)] mb-10">18-Month Roadmap</h2>
+    <ol class="relative border-l-4 border-[var(--horne-orange)] space-y-12">
+      <li><span class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[var(--horne-orange)] rounded-full text-white font-bold">1</span><div class="ml-6 glass p-6"><h3 class="font-semibold text-[var(--horne-navy)]">Phase 1 – Foundations (M1‑M3)</h3><p>Policy adoptions, critical controls, Asset management, DOB engine operational.</p></div></li>
+      <li><span class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[var(--horne-orange)] rounded-full text-white font-bold">2</span><div class="ml-6 glass p-6"><h3 class="font-semibold text-[var(--horne-navy)]">Phase 2 – Core Systems (M4‑M9)</h3><p>Deploy monitoring & reporting, update procurement, build subrecipient guidance.</p></div></li>
+      <li><span class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[var(--horne-orange)] rounded-full text-white font-bold">3</span><div class="ml-6 glass p-6"><h3 class="font-semibold text-[var(--horne-navy)]">Phase 3 – Enhanced Capabilities (M10‑M15)</h3><p>Best‑practice integration, advanced trainings, compliance analytics.</p></div></li>
+      <li><span class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[var(--horne-orange)] rounded-full text-white font-bold">4</span><div class="ml-6 glass p-6"><h3 class="font-semibold text-[var(--horne-navy)]">Phase 4 – Optimization (M16‑M18)</h3><p>Audit readiness, continuous improvement loop, lessons‑learned white‑paper.</p></div></li>
+    </ol>
+  </section>
+
+  <footer class="text-center pb-10 text-sm opacity-70">© 2025 HORNE LLP • CDBG-DR Strategy Unit</footer>
+
+  <script>
+    new Chart(document.getElementById('donutChart'), {type:'doughnut',data:{labels:['Capabilities','Gaps'],datasets:[{data:[76,49],backgroundColor:['#10B981','#EF4444'],hoverOffset:4}]},options:{plugins:{legend:{position:'bottom'}}}});
+    new Chart(document.getElementById('barChart'), {type:'bar',data:{labels:['Property','Procurement','Admin','Financial','Monitoring'],datasets:[{label:'Gaps',data:[9,6,6,5,5],backgroundColor:'#002F6C'}]},options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true}}}});
+    function exportPDF(){html2pdf().set({margin:0,filename:'TN-CDBG-DR_Executive-Brief.pdf',html2canvas:{scale:3},jsPDF:{orientation:'portrait',unit:'in',format:'letter',compressPDF:true}}).from(document.body).save();}
+  </script>
+</body>
+</html>
